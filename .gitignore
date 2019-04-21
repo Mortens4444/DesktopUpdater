@@ -1,0 +1,10 @@
+SourceInfo/obj/
+SourceInfo/bin/
+packages/
+MessageBoxes/obj/
+Enums/obj/
+Enums/bin/
+DesktopUpdater/obj/
+Consts/obj/
+.vs/
+Consts/bin/
