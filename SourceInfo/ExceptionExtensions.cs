@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 namespace SourceInfo
 {
-    public static class ExcetionExtensions
+    public static class ExceptionExtensions
     {
         public static int GetErrorCode(this Exception ex)
         {
