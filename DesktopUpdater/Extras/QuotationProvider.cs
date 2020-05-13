@@ -1660,7 +1660,7 @@ namespace DesktopUpdater.Extras
             "In malis promissis fides non expedit observari. (Reg. iuris 68.) = Az erkölcstelen tárgyú ígéreteket nem kell megtartani.",
             "In manibus Dei sors mea. = Sorsom Isten kezében van. (Jelmondat)",
             "In me haec cudetur faba. (Terentius) = Rajtam csépelik ki ezt a babot... (én fogok ezért lakolni)",
-            "In medias res. (Horatius) = Belevágni a téma velejébe, közepébe. (nem körtönfalazni)",
+            "In medias res. (Horatius) = Belevágni a téma velejébe, közepébe. (nem köntörfalazni)",
             "In medio stat virtus. (Ovidius) = Középen van az erény (a sok és kevés között). (Ahogy Ovidius mondja: In medio tutissimus ibis = Középen járhatsz a legbiztosabban.)",
             "In memoriam. = Emlékére, örök emlékezetül.",
             "In perpetuam rei memoriam. = Emlékére, örök emlékezetül.",
