@@ -1,5 +1,4 @@
-﻿using Consts;
-using System;
+﻿using System;
 using System.IO;
 
 namespace DesktopUpdater
@@ -21,7 +20,7 @@ namespace DesktopUpdater
                     fileStream.Close();
                 }
             }
-            else throw new FileNotFoundException(String.Concat(Constants.FILE_NOT_FOUND, filename), filename);
+            else throw new FileNotFoundException($"File not found: {filename}", filename);
             return result;
         }
 

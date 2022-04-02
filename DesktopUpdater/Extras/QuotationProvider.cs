@@ -3062,7 +3062,7 @@ namespace DesktopUpdater.Extras
             "Reddunt delirum foemina, vina virum. = A férfit bolonddá teszi a nő és a bor.",
             "Reductio ad absurdum. = Képtelenséghez való visszavezetés. (Egy tételt úgy igazolunk, hogy kimutatjuk a vele ellenkező tételek lehetetlenségét, képtelenségét.)",
             "Refert si bonus an velis videri. (Martialis) = Az a fontos, hogy jó légy – nem az, hogy jónak tartsanak.",
-            "Refugium peccatorum. = bűnösök menedéke. (Eredetileg egy Mária-litánia részlete. Olyan személy, kegyhely, intézmény, akinél ill. ahol menedéket találnak a bajbajutottak.",
+            "Refugium peccatorum. = Bűnösök menedéke. (Eredetileg egy Mária-litánia részlete. Olyan személy, kegyhely, intézmény, akinél ill. ahol menedéket találnak a bajbajutottak.",
             "Regia crede mihi res est succurrere lapsis. (Ovidius) = Hidd el nekem, királyi dolog az elesetteken segíteni.",
             "Regibus longae sunt manus. = A királyoknak hosszú kezük van. (Hatalmuk messzire elér.)",
             "Regina coeli. = Mennyországnak királynéja. (Szűz Mária megszólítása a litániában. Egy XII. századi antifóna kezdő szavai.",

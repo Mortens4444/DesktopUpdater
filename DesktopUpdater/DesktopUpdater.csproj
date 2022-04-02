@@ -53,8 +53,20 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Enums, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinForms.MessageBoxes.1.0.1\lib\Enums.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageBoxes, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinForms.MessageBoxes.1.0.1\lib\MessageBoxes.dll</HintPath>
+    </Reference>
+    <Reference Include="MessageBoxSender, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinForms.MessageBoxes.1.0.1\lib\MessageBoxSender.exe</HintPath>
+    </Reference>
     <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="SourceInfo, Version=1.0.7409.20471, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinForms.MessageBoxes.1.0.1\lib\SourceInfo.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Drawing" />
@@ -120,24 +132,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Consts\Consts.csproj">
-      <Project>{0938036C-D437-498F-B15C-4528F260FFCF}</Project>
-      <Name>Consts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Enums\Enums.csproj">
-      <Project>{A978CC93-5493-44E4-9653-99478E633B8B}</Project>
-      <Name>Enums</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\MessageBoxes\MessageBoxes.csproj">
-      <Project>{E5A17636-88F6-4209-BC72-8F5A36AD9701}</Project>
-      <Name>MessageBoxes</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\SourceInfo\SourceInfo.csproj">
-      <Project>{013BADF1-7450-4F0D-BA16-35A8DFB52697}</Project>
-      <Name>SourceInfo</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\clear.bmp" />
