@@ -1295,7 +1295,7 @@ namespace DesktopUpdater.Extras
             "Favete linguis! (Horatius) = Hallgassatok! (Ezek voltak a haldokló Prohászka Ottokár püspök utolsó szavai környezetéhez.)",
             "Febris nostra avaritia est, febris nostra libido est, febris nostra luxuria est, febris nostra ambitio est, febris nostra iracundia est. (Szent Ambrus) = A mi betegségünk a kapzsiság, a mi betegségünk a bujaság, a mi betegségünk a fényűzés, a mi betegségünk a törtetés, a mi betegségünk a harag. ( A IV. század óta e bajok nem szűntek meg.)",
             "Februarius (mensis). Februa (többes szám) = Tisztító és engesztelő ünnep. Így február = A tisztulás hava.",
-            "Fecerunt magnum áldomás... = Nagy áldomást csaptak... (Anonymus krónikájából)",
+            "Fecerunt magnum aldumas... = Nagy áldomást csaptak... (Anonymus krónikájából)",
             "Feci quod potui. = Csináltam (rajzoltam, készítettem), amit tudtam – festők, művészek teszik e szót művükre, nevük elé. (Rövidítve: fec.)",
             "Feci quod potui, faciant meliora potentes. = Megtettem, amit tudtam, a hatalmasok csinálják jobban.",
             "Felicitas est superba. (Curtius) = A szerencse gőgös.",
