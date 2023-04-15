@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace DesktopUpdater.Interfaces;
 
-namespace DesktopUpdater.Interfaces
+public interface IBirthDayProvider
 {
-    public interface IBirthDayProvider
-    {
-        string GetBirthDayText(DateTime date);
-    }
+    string GetBirthDayText(DateTime date);
 }

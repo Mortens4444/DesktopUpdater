@@ -1,34 +1,31 @@
 ﻿using DesktopUpdater.Interfaces;
 using DesktopUpdater.Options;
-using System.Drawing;
-using System.Windows.Forms;
 
-namespace DesktopUpdater.Extras
+namespace DesktopUpdater.Extras;
+
+public class SizeProvider : ISizeProvider
 {
-    public class SizeProvider : ISizeProvider
+    private readonly OptionsDto options;
+
+    public SizeProvider(IOptionsProvider optionsProvider)
     {
-        private readonly OptionsDto options;
+        options = optionsProvider.Options;
+    }
 
-        public SizeProvider(IOptionsProvider optionsProvider)
+    public Size GetSize()
+    {
+        int width, height;
+
+        if (!options.ForceCustomSize && Screen.PrimaryScreen != null)
         {
-            options = optionsProvider.Options;
+            width = Screen.PrimaryScreen.Bounds.Width;
+            height = Screen.PrimaryScreen.Bounds.Height;
         }
-
-        public Size GetSize()
+        else
         {
-            int width, height;
-
-            if (options.ForceCustomSize)
-            {
-                width = options.Width;
-                height = options.Height;
-            }
-            else
-            {
-                width = Screen.PrimaryScreen.Bounds.Width;
-                height = Screen.PrimaryScreen.Bounds.Height;
-            }
-            return new Size(width, height);
+            width = options.Width;
+            height = options.Height;
         }
+        return new Size(width, height);
     }
 }

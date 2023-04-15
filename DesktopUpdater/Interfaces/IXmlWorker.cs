@@ -1,9 +1,8 @@
-﻿namespace DesktopUpdater.Interfaces
-{
-    public interface IXmlWorker
-    {
-        string ImageName { get; }
+﻿namespace DesktopUpdater.Interfaces;
 
-        string DownloadImageAndGetName();
-    }
+public interface IXmlWorker
+{
+    string? ImageName { get; }
+
+    Task<string> DownloadImageAndGetNameAsync();
 }

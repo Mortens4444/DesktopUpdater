@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
-namespace DesktopUpdater.Interfaces
+namespace DesktopUpdater.Interfaces;
+
+public interface ITextToImage
 {
-    public interface ITextToImage
-    {
-        Bitmap AddText(Image image, Font font, string text, Rectangle region);
-    }
+    Bitmap? AddText(Image image, Font font, string text, Rectangle region);
 }

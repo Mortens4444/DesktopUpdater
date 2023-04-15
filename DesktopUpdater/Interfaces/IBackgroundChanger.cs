@@ -1,7 +1,6 @@
-﻿namespace DesktopUpdater.Interfaces
+﻿namespace DesktopUpdater.Interfaces;
+
+public interface IBackgroundChanger
 {
-    public interface IBackgroundChanger
-    {
-        void ChangeBackground(string filename);
-    }
+    void ChangeBackground(string filename);
 }

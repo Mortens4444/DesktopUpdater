@@ -1,93 +1,84 @@
 ﻿using DesktopUpdater.Interfaces;
-using MessageBoxes;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+using DesktopUpdater.MessageBoxes;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
-using System.Threading;
-using System.Windows.Forms;
 
-namespace DesktopUpdater.Extras
+namespace DesktopUpdater.Extras;
+
+public class TextToImage : ITextToImage
 {
-    public class TextToImage : ITextToImage
+    private const sbyte Shadow = 1;
+    private const sbyte Shadow2 = 2;
+
+    public Bitmap? AddText(Image image, Font font, string text, Rectangle region)
     {
-        private const sbyte Shadow = 1;
-        private const sbyte Shadow2 = 2;
-
-        public Bitmap AddText(Image image, Font font, string text, Rectangle region)
+        if (image == null)
         {
-            if (image == null)
-            {
-                return null;
-            }
-
-            var bmp = new Bitmap(image);
-            try
-            {
-                var result = bmp.Clone(new Rectangle(0, 0, bmp.Width, bmp.Height), PixelFormat.Format32bppArgb);
-                WriteTextToBitmapWithShadow(result, region, text, font);
-                return result;
-            }
-            catch (Exception ex)
-            {
-                ErrorBox.Show(ex, Timeout.Infinite);
-            }
-            return bmp;
+            return null;
         }
 
-        public static Size MeasureText(Size proposedSize, Font font, string text)
+        var bmp = new Bitmap(image);
+        try
         {
-            return TextRenderer.MeasureText(text, font, proposedSize, GetTextFormatFlags());
+            var result = bmp.Clone(new Rectangle(0, 0, bmp.Width, bmp.Height), PixelFormat.Format32bppArgb);
+            WriteTextToBitmapWithShadow(result, region, text, font);
+            return result;
         }
-
-        private static TextFormatFlags GetTextFormatFlags()
+        catch (Exception ex)
         {
-            return TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix;
+            ErrorBox.Show(ex);
         }
+        return bmp;
+    }
 
-        private static void WriteTextToBitmapWithShadow(Image image, Rectangle region, string text, Font font)
-        {
-            var flags = GetTextFormatFlags();
-            var x = region.X;
-            var y = region.Y;
+    public static Size MeasureText(Size proposedSize, Font font, string text)
+    {
+        return TextRenderer.MeasureText(text, font, proposedSize, GetTextFormatFlags());
+    }
 
-            var shadowFont = new Font(font.FontFamily, font.Size, FontStyle.Bold);
-            using (var g = Graphics.FromImage(image))
+    private static TextFormatFlags GetTextFormatFlags()
+    {
+        return TextFormatFlags.Left | TextFormatFlags.Top | TextFormatFlags.WordBreak | TextFormatFlags.NoPrefix;
+    }
+
+    private static void WriteTextToBitmapWithShadow(Image image, Rectangle region, string text, Font font)
+    {
+        var flags = GetTextFormatFlags();
+        var x = region.X;
+        var y = region.Y;
+
+        using var graphics = Graphics.FromImage(image);
+        graphics.TextRenderingHint = TextRenderingHint.AntiAlias;
+        graphics.InterpolationMode = InterpolationMode.HighQualityBicubic;
+
+        var directions = new List<(sbyte horizontal, sbyte vertical)>()
             {
-                g.TextRenderingHint = TextRenderingHint.AntiAlias;
-                g.InterpolationMode = InterpolationMode.HighQualityBicubic;
+                (horizontal: 0, vertical: -Shadow2), // North
+                (horizontal: -Shadow2, vertical: 0), // West
+                (horizontal: Shadow2, vertical: -Shadow2), // North-east
+                (horizontal: 0, vertical: Shadow2), // South
+                (horizontal: -Shadow2, vertical: Shadow2), // South-west
+                (horizontal: -Shadow2, vertical: -Shadow2), // North-west
+                (horizontal: Shadow2, vertical: 0), // East
+                (horizontal: Shadow2, vertical: Shadow2), // South-east
 
-                var directions = new List<(sbyte horizontal, sbyte vertical)>()
-                {
-                    (horizontal: 0, vertical: -Shadow2), // North
-                    (horizontal: -Shadow2, vertical: 0), // West
-                    (horizontal: Shadow2, vertical: -Shadow2), // North-east
-                    (horizontal: 0, vertical: Shadow2), // South
-                    (horizontal: -Shadow2, vertical: Shadow2), // South-west
-                    (horizontal: -Shadow2, vertical: -Shadow2), // North-west
-                    (horizontal: Shadow2, vertical: 0), // East
-                    (horizontal: Shadow2, vertical: Shadow2), // South-east
-
-                    (horizontal: 0, vertical: -Shadow), // North
-                    (horizontal: -Shadow, vertical: 0), // West
-                    (horizontal: Shadow, vertical: -Shadow), // North-east
-                    (horizontal: 0, vertical: Shadow), // South
-                    (horizontal: -Shadow, vertical: Shadow), // South-west
-                    (horizontal: -Shadow, vertical: -Shadow), // North-west
-                    (horizontal: Shadow, vertical: 0), // East
-                    (horizontal: Shadow, vertical: Shadow), // South-east
-                };
-                foreach (var (horizontal, vertical) in directions)
-                {
-                    region.Location = new Point(x + horizontal, y + vertical);
-                    TextRenderer.DrawText(g, text, font, region, Color.Black, flags);
-                }
-
-                region.Location = new Point(x, y);
-                TextRenderer.DrawText(g, text, font, region, Color.White, flags);
-            }
+                (horizontal: 0, vertical: -Shadow), // North
+                (horizontal: -Shadow, vertical: 0), // West
+                (horizontal: Shadow, vertical: -Shadow), // North-east
+                (horizontal: 0, vertical: Shadow), // South
+                (horizontal: -Shadow, vertical: Shadow), // South-west
+                (horizontal: -Shadow, vertical: -Shadow), // North-west
+                (horizontal: Shadow, vertical: 0), // East
+                (horizontal: Shadow, vertical: Shadow), // South-east
+            };
+        foreach (var (horizontal, vertical) in directions)
+        {
+            region.Location = new Point(x + horizontal, y + vertical);
+            TextRenderer.DrawText(graphics, text, font, region, Color.Black, flags);
         }
+
+        region.Location = new Point(x, y);
+        TextRenderer.DrawText(graphics, text, font, region, Color.White, flags);
     }
 }

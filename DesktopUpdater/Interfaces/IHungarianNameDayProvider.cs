@@ -1,9 +1,6 @@
-﻿using System;
+﻿namespace DesktopUpdater.Interfaces;
 
-namespace DesktopUpdater.Interfaces
+public interface IHungarianNameDayProvider
 {
-    public interface IHungarianNameDayProvider
-    {
-        string GetNameDayText(DateTime date);
-    }
+    string GetNameDayText(DateTime date);
 }

@@ -1,9 +1,8 @@
 ﻿using System.Drawing;
 
-namespace DesktopUpdater.Interfaces
+namespace DesktopUpdater.Interfaces;
+
+public interface ISizeProvider
 {
-    public interface ISizeProvider
-    {
-        Size GetSize();
-    }
+    Size GetSize();
 }

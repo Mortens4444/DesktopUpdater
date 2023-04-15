@@ -1,9 +1,8 @@
 ﻿using DesktopUpdater.Options;
 
-namespace DesktopUpdater.Interfaces
+namespace DesktopUpdater.Interfaces;
+
+public interface IOptionsProvider
 {
-    public interface IOptionsProvider
-    {
-        OptionsDto Options { get; }
-    }
+    OptionsDto Options { get; }
 }

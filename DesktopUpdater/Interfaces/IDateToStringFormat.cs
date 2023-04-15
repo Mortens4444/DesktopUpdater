@@ -1,7 +1,6 @@
-﻿namespace DesktopUpdater.Interfaces
+﻿namespace DesktopUpdater.Interfaces;
+
+public interface IDateToStringFormat
 {
-    public interface IDateToStringFormat
-    {
-        string GetStringFormat(int month, int day);
-    }
+    string GetStringFormat(int month, int day);
 }

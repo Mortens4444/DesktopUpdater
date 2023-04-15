@@ -1,7 +1,6 @@
-﻿namespace DesktopUpdater.Interfaces
+﻿namespace DesktopUpdater.Interfaces;
+
+public interface IBackgroundSaver
 {
-    public interface IBackgroundSaver
-    {
-        void SaveImage(string path, string imageName, string backgroundJpgFile);
-    }
+    void SaveImage(string path, string? imageName, string backgroundJpgFile);
 }

@@ -1,27 +1,24 @@
-﻿using System;
+﻿namespace DesktopUpdater;
 
-namespace DesktopUpdater
+public static class StringExtensions
 {
-    public static class StringExtensions
+    public static string Substring(this string value, string firstElement, string secondElement)
     {
-        public static string Substring(this string value, string firstElement, string secondElement)
+        return value.Substring(firstElement, secondElement, false, 0);
+    }
+
+    public static string Substring(this string value, string firstElement, string secondElement, bool caseInsensitive, int startIndex)
+    {
+        var sIndex = caseInsensitive ? value.IndexOf(firstElement, startIndex, StringComparison.CurrentCultureIgnoreCase) : value.IndexOf(firstElement, startIndex);
+
+        if (sIndex != -1)
         {
-            return value.Substring(firstElement, secondElement, false, 0);
+            sIndex += firstElement.Length;
+
+            var eIndex = caseInsensitive ? value.IndexOf(secondElement, sIndex, StringComparison.CurrentCultureIgnoreCase) : value.IndexOf(secondElement, sIndex);
+
+            return eIndex == -1 ? value[sIndex..] : value[sIndex..eIndex];
         }
-
-        public static string Substring(this string value, string firstElement, string secondElement, bool caseInsensitive, int startIndex)
-        {
-            var sIndex = caseInsensitive ? value.IndexOf(firstElement, startIndex, StringComparison.CurrentCultureIgnoreCase) : value.IndexOf(firstElement, startIndex);
-
-            if (sIndex != -1)
-            {
-                sIndex += firstElement.Length;
-
-                var eIndex = caseInsensitive ? value.IndexOf(secondElement, sIndex, StringComparison.CurrentCultureIgnoreCase) : value.IndexOf(secondElement, sIndex);
-
-                return eIndex == -1 ? value.Substring(sIndex) : value.Substring(sIndex, eIndex - sIndex);
-            }
-            return String.Empty;
-        }
+        return String.Empty;
     }
 }

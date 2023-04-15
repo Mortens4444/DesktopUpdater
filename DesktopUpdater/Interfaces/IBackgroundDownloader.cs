@@ -1,7 +1,6 @@
-﻿namespace DesktopUpdater.Interfaces
+﻿namespace DesktopUpdater.Interfaces;
+
+public interface IBackgroundDownloader
 {
-    public interface IBackgroundDownloader
-    {
-        bool DownloadImage(string urlBase, string backgroundJpgFile);
-    }
+    Task DownloadImageAsync(string urlBase, string backgroundJpgFile);
 }

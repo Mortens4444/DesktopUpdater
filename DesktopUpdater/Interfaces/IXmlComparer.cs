@@ -1,7 +1,6 @@
-﻿namespace DesktopUpdater.Interfaces
+﻿namespace DesktopUpdater.Interfaces;
+
+public interface IXmlComparer
 {
-    public interface IXmlComparer
-    {
-        bool IsThisXmlExists(string xmlFile, string xmlFileContent);
-    }
+    bool IsThisXmlExists(string xmlFile, string xmlFileContent);
 }

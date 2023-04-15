@@ -1,9 +1,6 @@
-﻿using DesktopUpdater.Options;
+﻿namespace DesktopUpdater.Interfaces;
 
-namespace DesktopUpdater.Interfaces
+public interface IOptionsFileCreator
 {
-    public interface IOptionsFileCreator
-    {
-        void CreateOptionsFileIfNotExists(string optionsFilename);
-    }
+    void CreateOptionsFileIfNotExists(string optionsFilename);
 }

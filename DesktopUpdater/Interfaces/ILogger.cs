@@ -1,9 +1,8 @@
-﻿namespace DesktopUpdater.Interfaces
-{
-    public interface ILogger
-    {
-        void Create(string logData);
+﻿namespace DesktopUpdater.Interfaces;
 
-        void Append(string logData);
-    }
+public interface ILogger
+{
+    void Create(string logData);
+
+    void Append(string logData);
 }
