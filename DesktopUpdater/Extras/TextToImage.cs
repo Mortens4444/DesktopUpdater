@@ -1,5 +1,5 @@
 ﻿using DesktopUpdater.Interfaces;
-using DesktopUpdater.MessageBoxes;
+using MessageBoxes;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.Drawing.Text;
@@ -27,7 +27,7 @@ public class TextToImage : ITextToImage
         }
         catch (Exception ex)
         {
-            ErrorBox.Show(ex);
+            ErrorBox.Show(ex, Timeout.Infinite);
         }
         return bmp;
     }

@@ -1,5 +1,5 @@
 ﻿using DesktopUpdater.Interfaces;
-using DesktopUpdater.MessageBoxes;
+using MessageBoxes;
 using System.Runtime.InteropServices;
 
 namespace DesktopUpdater.Background;

@@ -1,5 +1,5 @@
 ﻿using DesktopUpdater.Interfaces;
-using DesktopUpdater.MessageBoxes;
+using MessageBoxes;
 
 namespace DesktopUpdater;
 
@@ -10,7 +10,6 @@ static class Program
     static void Main(string[] args)
     {
         var dependencyInjection = new DependencyInjection();
-
         var logger = dependencyInjection.Get<ILogger>();
         logger.Create("DesktopUpdater has been started.");
 
@@ -105,7 +104,7 @@ static class Program
             catch (Exception ex)
             {
                 logger.Append($"Some error occurred: {ex.Message}.");
-                ErrorBox.Show(ex);
+                ErrorBox.Show(ex, Timeout.Infinite);
             }
             finally
             {

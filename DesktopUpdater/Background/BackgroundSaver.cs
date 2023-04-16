@@ -1,5 +1,5 @@
 ﻿using DesktopUpdater.Interfaces;
-using DesktopUpdater.MessageBoxes;
+using MessageBoxes;
 using System.Text.RegularExpressions;
 
 namespace DesktopUpdater.Background;
@@ -20,7 +20,7 @@ public class BackgroundSaver : IBackgroundSaver
         var dialogResult = DialogResult.Yes;
         if (File.Exists(filename))
         {
-            dialogResult = ConfirmBox.Show("File already exists", String.Concat("Do you want to overwrite existing file?", Environment.NewLine, filename));
+            dialogResult = ConfirmBox.Show("File already exists", String.Concat("Do you want to overwrite existing file?", Environment.NewLine, filename), Enums.Decide.No);
         }
 
         if (dialogResult != DialogResult.Yes)
