@@ -1,4 +1,5 @@
 ﻿using DesktopUpdater.Interfaces;
+using DesktopUpdater.Options;
 using MessageBoxes;
 
 namespace DesktopUpdater;
@@ -7,6 +8,7 @@ static class Program
 {
     private const string BACKGROUND_BMP = "background.bmp";
 
+    [STAThread]
     static void Main(string[] args)
     {
         var dependencyInjection = new DependencyInjection();
@@ -40,63 +42,7 @@ static class Program
                     }
                     else
                     {
-                        var outputFilename = Path.Combine(AppContext.BaseDirectory, BACKGROUND_BMP);
-
-                        imageTextCreator.Initialize(backgroundJpgFile);
-                        if (imageTextCreator.Image == null)
-                        {
-                            throw new ArgumentNullException(nameof(imageTextCreator), $"Cannot be null: {nameof(imageTextCreator)}.{nameof(imageTextCreator.Image)}");
-                        }
-
-                        const int locationX = 200;
-                        const int width = 1000;
-                        const int height = 80;
-                        var location = new Point(locationX, 30);
-
-                        const int nameHeight = 30;
-                        if (options.ShowImageInfo && xmlWorker.ImageName != null)
-                        {
-                            imageTextCreator.AddTextToTopCenter(xmlWorker.ImageName, new Rectangle(location, new Size(width, nameHeight)));
-                        }
-
-                        var now = DateTime.Now;
-                        if (options.ShowNamedays)
-                        {
-                            var hungarianNameDayProvider = dependencyInjection.Get<IHungarianNameDayProvider>();
-                            imageTextCreator.AddTextToTopLeft(hungarianNameDayProvider.GetNameDayText(now), new Rectangle(locationX, location.Y + nameHeight, width, height));
-                        }
-                        if (options.ShowBirthdays)
-                        {
-                            var birthDayProvider = dependencyInjection.Get<IBirthDayProvider>();
-                            imageTextCreator.AddTextToTopRight(birthDayProvider.GetBirthDayText(now), new Rectangle(locationX, location.Y + nameHeight, width, height));
-                        }
-
-                        const int margin = 20;
-                        const int quationHeight = 90;
-                        var quotationProvider = dependencyInjection.Get<IQuotationProvider>();
-                        if (options.ShowQuotation)
-                        {
-                            imageTextCreator.AddTextToTopCenter(quotationProvider.GetQuotation(), new Rectangle(locationX, location.Y + height + nameHeight, imageTextCreator.Image.Width - 2 * locationX, imageTextCreator.Image.Height - 2 * quationHeight));
-                        }
-
-                        try
-                        {
-                            if (options.FixQuotationNumber1 != 0)
-                            {
-                                imageTextCreator.AddTextToBottomLeft(quotationProvider.GetQuotation(options.FixQuotationNumber1), new Rectangle(margin, 2 * quationHeight, imageTextCreator.Image.Width - margin, imageTextCreator.Image.Height - quationHeight));
-                            }
-                            if (options.FixQuotationNumber2 != 0)
-                            {
-                                imageTextCreator.AddTextToBottomLeft(quotationProvider.GetQuotation(options.FixQuotationNumber2), new Rectangle(margin, quationHeight, imageTextCreator.Image.Width - margin, imageTextCreator.Image.Height));
-                            }
-                        }
-                        catch (Exception ex)
-                        {
-                            logger.Append($"Some error occurred: {ex.Message}.");                        
-                        }
-
-                        imageTextCreator.SaveAsBitmap(outputFilename);
-                        backgroundChanger.ChangeBackground(outputFilename);
+                        ChangeBackground(dependencyInjection, logger, options, xmlWorker, backgroundChanger, imageTextCreator, backgroundJpgFile);
                     }
                     break;
                 }
@@ -111,6 +57,68 @@ static class Program
                 Thread.Sleep(options.WaitBetweenDownloadAttemptsInMiliseconds);
             }
         }
+    }
+
+    private static void ChangeBackground(DependencyInjection dependencyInjection, ILogger logger, OptionsDto options, IXmlWorker xmlWorker, IBackgroundChanger backgroundChanger, IImageTextCreator imageTextCreator, string backgroundJpgFile)
+    {
+        var outputFilename = Path.Combine(AppContext.BaseDirectory, BACKGROUND_BMP);
+
+        imageTextCreator.Initialize(backgroundJpgFile);
+        if (imageTextCreator.Image == null)
+        {
+            var name = $"{nameof(imageTextCreator)}.{nameof(imageTextCreator.Image)}";
+            throw new ArgumentNullException(name);
+        }
+
+        const int locationX = 200;
+        const int width = 1000;
+        const int height = 80;
+        var location = new Point(locationX, 30);
+
+        const int nameHeight = 30;
+        if (options.ShowImageInfo && xmlWorker.ImageName != null)
+        {
+            imageTextCreator.AddTextToTopCenter(xmlWorker.ImageName, new Rectangle(location, new Size(width, nameHeight)));
+        }
+
+        var now = DateTime.Now;
+        if (options.ShowNamedays)
+        {
+            var hungarianNameDayProvider = dependencyInjection.Get<IHungarianNameDayProvider>();
+            imageTextCreator.AddTextToTopLeft(hungarianNameDayProvider.GetNameDayText(now), new Rectangle(locationX, location.Y + nameHeight, width, height));
+        }
+        if (options.ShowBirthdays)
+        {
+            var birthDayProvider = dependencyInjection.Get<IBirthDayProvider>();
+            imageTextCreator.AddTextToTopRight(birthDayProvider.GetBirthDayText(now), new Rectangle(locationX, location.Y + nameHeight, width, height));
+        }
+
+        const int margin = 20;
+        const int quationHeight = 90;
+        var quotationProvider = dependencyInjection.Get<IQuotationProvider>();
+        if (options.ShowQuotation)
+        {
+            imageTextCreator.AddTextToTopCenter(quotationProvider.GetQuotation(), new Rectangle(locationX, location.Y + height + nameHeight, imageTextCreator.Image.Width - 2 * locationX, imageTextCreator.Image.Height - 2 * quationHeight));
+        }
+
+        try
+        {
+            if (options.FixQuotationNumber1 != 0)
+            {
+                imageTextCreator.AddTextToBottomLeft(quotationProvider.GetQuotation(options.FixQuotationNumber1), new Rectangle(margin, 2 * quationHeight, imageTextCreator.Image.Width - margin, imageTextCreator.Image.Height - quationHeight));
+            }
+            if (options.FixQuotationNumber2 != 0)
+            {
+                imageTextCreator.AddTextToBottomLeft(quotationProvider.GetQuotation(options.FixQuotationNumber2), new Rectangle(margin, quationHeight, imageTextCreator.Image.Width - margin, imageTextCreator.Image.Height));
+            }
+        }
+        catch (Exception ex)
+        {
+            logger.Append($"Some error occurred: {ex.Message}.");
+        }
+
+        imageTextCreator.SaveAsBitmap(outputFilename);
+        backgroundChanger.ChangeBackground(outputFilename);
     }
 
     private static bool IsSave(string arg)

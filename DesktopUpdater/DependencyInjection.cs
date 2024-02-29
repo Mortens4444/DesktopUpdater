@@ -28,7 +28,6 @@ public class DependencyInjection
         serviceCollection.AddScoped<IQuotationProvider, QuotationProvider>();
         serviceCollection.AddScoped<IHungarianNameDayProvider, HungarianNameDayProvider>();
         serviceCollection.AddScoped<IBirthDayProvider, BirthDayProvider>();
-        serviceCollection.AddScoped<IDateToStringFormat, DateToStringFormat>();
         serviceCollection.AddScoped<ITextToImage, TextToImage>();
         serviceCollection.AddScoped<IImageTextCreator, ImageTextCreator>();
         serviceCollection.AddScoped<ISizeProvider, SizeProvider>();

@@ -6,7 +6,7 @@ namespace DesktopUpdater.Background;
 
 public class BackgroundChanger : IBackgroundChanger
 {
-    [DllImport("User32.dll", SetLastError = true)]
+    [DllImport("User32.dll", SetLastError = true, CharSet = CharSet.Unicode)]
     [return: MarshalAs(UnmanagedType.Bool)]
     private static extern bool SystemParametersInfo(uint uiAction, uint uiParam, string pvParam, uint fWinIni);
 
@@ -19,14 +19,11 @@ public class BackgroundChanger : IBackgroundChanger
         SetBackgroundBmp(filename);
     }
 
-    private static bool SetBackgroundBmp(string filename)
+    private static void SetBackgroundBmp(string filename)
     {
         if (!SystemParametersInfo(SPI_SETDESKWALLPAPER, 0, filename, SPIF_SENDCHANGE | SPIF_UPDATEINIFILE))
         {
             ErrorBox.ShowLastWin32Error();
-            return false;
         }
-
-        return true;
     }
 }
