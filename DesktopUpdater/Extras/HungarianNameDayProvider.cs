@@ -96,7 +96,7 @@ public class HungarianNameDayProvider : IHungarianNameDayProvider
 
     private static IList<string> GetAugustNameDays()
     {
-        return new List<string> { "Boglárka", "Lehel", "Hermina", "Domonkos, Dominika", "Krisztina", "Berta, Bettina", "Ibolya", "László", "Emőd", "Lörinc", "Zsuzsanna, Tiborc", "Klára", "Ipoly", "Marcell", "Mária", "Ábrahám", "Jácint", "Ilona", "Huba", "ALKOTMÁNY ÜNN., István", "Sámuel, Hajna", "Menyhért, Mirjam", "Bence", "Bertalan", "Lajos, Patrícia", "Izsó", "Gáspár", "Ágoston", "Beatrix, Erna", "Rózsa", "Erika, Bella" };
+        return new List<string> { "Boglárka", "Lehel", "Hermina", "Domonkos, Dominika", "Krisztina", "Berta, Bettina", "Ibolya", "László", "Emőd", "Lőrinc", "Zsuzsanna, Tiborc", "Klára", "Ipoly", "Marcell", "Mária", "Ábrahám", "Jácint", "Ilona", "Huba", "ALKOTMÁNY ÜNN., István", "Sámuel, Hajna", "Menyhért, Mirjam", "Bence", "Bertalan", "Lajos, Patrícia", "Izsó", "Gáspár", "Ágoston", "Beatrix, Erna", "Rózsa", "Erika, Bella" };
     }
 
     private static IList<string> GetSeptemberNameDays()
